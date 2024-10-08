@@ -1,5 +1,5 @@
 {
-  "name": "ldap-async-win32-x64-msvc",
+  "name": "ldap-just-win32-x64-msvc",
   "version": "0.0.0",
   "os": [
     "win32"
@@ -7,9 +7,9 @@
   "cpu": [
     "x64"
   ],
-  "main": "ldap-async.win32-x64-msvc.node",
+  "main": "ldap-just.win32-x64-msvc.node",
   "files": [
-    "ldap-async.win32-x64-msvc.node"
+    "ldap-just.win32-x64-msvc.node"
   ],
   "license": "MIT",
   "engines": {

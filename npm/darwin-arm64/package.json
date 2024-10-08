@@ -1,15 +1,15 @@
 {
-  "name": "ldap-just-darwin-x64",
+  "name": "ldap-just-darwin-arm64",
   "version": "0.0.0",
   "os": [
     "darwin"
   ],
   "cpu": [
-    "x64"
+    "arm64"
   ],
-  "main": "ldap-just.darwin-x64.node",
+  "main": "ldap-just.darwin-arm64.node",
   "files": [
-    "ldap-just.darwin-x64.node"
+    "ldap-just.darwin-arm64.node"
   ],
   "license": "MIT",
   "engines": {
