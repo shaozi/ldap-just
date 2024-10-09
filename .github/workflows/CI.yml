@@ -37,10 +37,7 @@ jobs:
             build: |-
               set -e;
               apt update;
-              sudo apt-get install -y pkg-config libssl-dev perl; # REF: https://github.com/napi-rs/napi-rs/issues/1359
-              export OPENSSL_LIB_DIR="/usr/lib/x86_64-linux-gnu";
-              export OPENSSL_INCLUDE="/usr/include/openssl";
-              export CXXFLAGS="-stdlib=libc++ -L/usr/lib/llvm-18/lib -static"
+              apt-get install -y pkg-config libssl-dev perl; # REF: https://github.com/napi-rs/napi-rs/issues/1359
               yarn build --target x86_64-unknown-linux-gnu;
               strip *.node;
           - host: ubuntu-latest
@@ -48,9 +45,8 @@ jobs:
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
             build: |-
               set -e;
-              sudo apk upgrade;
-              sudo apk add pkgconfig libssl-dev perl;
-              export CXXFLAGS="-stdlib=libc++ -L/usr/lib/llvm-18/lib -static"
+              apk upgrade;
+              apk add pkgconf openssl-dev perl;
               yarn build --target x86_64-unknown-linux-musl
           - host: macos-latest
             target: aarch64-apple-darwin
