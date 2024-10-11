@@ -184,7 +184,7 @@ jobs:
         shell: bash
       - uses: adambirds/docker-compose-action@v1.5.0
         with:
-          compose-file: "./compose.yaml"
+          compose-file: ${{ github.workspace }}/compose.yaml
       - name: Test bindings
         run: docker run --rm -v $(pwd):/build -w /build node:${{ matrix.node }}-slim yarn test
   test-linux-x64-musl-binding:
@@ -219,7 +219,7 @@ jobs:
         shell: bash
       - uses: adambirds/docker-compose-action@v1.5.0
         with:
-          compose-file: "./compose.yaml"
+          compose-file: ${{ github.workspace }}/compose.yaml
       - name: Test bindings
         run: docker run --rm -v $(pwd):/build -w /build node:${{ matrix.node }}-alpine yarn test
   publish:
