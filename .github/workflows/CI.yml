@@ -149,7 +149,7 @@ jobs:
       - name: Test bindings
         run: yarn test
       - name: stop ldap server container
-        if: alwasy()
+        if: always()
         run: docker compose -f compose.yaml down
   test-linux-x64-gnu-binding:
     name: Test bindings on Linux-x64-gnu - node@${{ matrix.node }}
@@ -184,7 +184,7 @@ jobs:
       - name: Test bindings
         run: yarn test
       - name: stop ldap server container
-        if: alwasy()
+        if: always()
         run: docker compose -f compose.yaml down
   test-linux-x64-musl-binding:
     name: Test bindings on x86_64-unknown-linux-musl - node@${{ matrix.node }}
@@ -219,7 +219,7 @@ jobs:
       - name: Test bindings
         run: yarn test
       - name: stop ldap server container
-        if: alwasy()
+        if: always()
         run: docker compose -f compose.yaml down
       # - name: Test bindings
         # run: docker run --rm -v $(pwd):/build -w /build node:${{ matrix.node }}-alpine yarn test
