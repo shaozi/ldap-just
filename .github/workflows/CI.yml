@@ -6,7 +6,7 @@ env:
 permissions:
   contents: write
   id-token: write
-"on":
+on:
   push:
     branches:
       - main
@@ -122,15 +122,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        settings:
-          - host: macos-latest
-            target: x86_64-apple-darwin
-          #- host: windows-latest
-          #  target: x86_64-pc-windows-msvc
         node:
           - "18"
           - "20"
-    runs-on: ${{ matrix.settings.host }}
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
       - name: Setup node
@@ -143,17 +138,19 @@ jobs:
         run: yarn install
       - name: Download artifacts
         uses: actions/download-artifact@v4
-        #with:
-        #  name: bindings-${{ matrix.settings.target }}
-        #  path: .
+        with:
+          name: bindings-x86_64-apple-darwin
+          path: .
       - name: List packages
         run: ls -R .
         shell: bash
-      - uses: adambirds/docker-compose-action@v1.5.0
-        with:
-          compose-file: "./compose.yaml"
+      - name: start ldap server container
+        run: docker compose -f compose.yaml up
       - name: Test bindings
         run: yarn test
+      - name: stop ldap server container
+        if: alwasy()
+        run: docker compose -f compose.yaml down
   test-linux-x64-gnu-binding:
     name: Test bindings on Linux-x64-gnu - node@${{ matrix.node }}
     needs:
@@ -182,11 +179,13 @@ jobs:
       - name: List packages
         run: ls -R .
         shell: bash
-      - uses: adambirds/docker-compose-action@v1.5.0
-        with:
-          compose-file: ${{ github.workspace }}/compose.yaml
+      - name: start ldap server container
+        run: docker compose -f compose.yaml up
       - name: Test bindings
-        run: docker run --rm -v $(pwd):/build -w /build node:${{ matrix.node }}-slim yarn test
+        run: yarn test
+      - name: stop ldap server container
+        if: alwasy()
+        run: docker compose -f compose.yaml down
   test-linux-x64-musl-binding:
     name: Test bindings on x86_64-unknown-linux-musl - node@${{ matrix.node }}
     needs:
@@ -217,11 +216,14 @@ jobs:
       - name: List packages
         run: ls -R .
         shell: bash
-      - uses: adambirds/docker-compose-action@v1.5.0
-        with:
-          compose-file: ${{ github.workspace }}/compose.yaml
       - name: Test bindings
-        run: docker run --rm -v $(pwd):/build -w /build node:${{ matrix.node }}-alpine yarn test
+        run: yarn test
+      - name: stop ldap server container
+        if: alwasy()
+        run: docker compose -f compose.yaml down
+      # - name: Test bindings
+        # run: docker run --rm -v $(pwd):/build -w /build node:${{ matrix.node }}-alpine yarn test
+        
   publish:
     name: Publish
     runs-on: ubuntu-latest
