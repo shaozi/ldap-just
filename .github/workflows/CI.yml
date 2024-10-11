@@ -150,11 +150,12 @@ jobs:
           max_attempts: 3
           polling_interval_seconds: 3
           command: |
-            ldapsearch -LLL -o 'ldif-wrap=no' \
-              -H ldap://localhost:1389 \
-              -D 'cn=radmin,dc=example,dc=com' \
-              -w password \
-              -b 'uid=einstein,ou=users,dc=example,dc=com' DN
+            curl localhost:1389
+            if [ $? -eq 52 ]; then
+              echo good
+            else
+              exit 1
+            fi
       - name: Test LDAP JUST
         run: yarn test
       - name: stop ldap server container
@@ -199,11 +200,12 @@ jobs:
           max_attempts: 3
           polling_interval_seconds: 3
           command: |
-            ldapsearch -LLL -o 'ldif-wrap=no' \
-              -H ldap://localhost:1389 \
-              -D 'cn=radmin,dc=example,dc=com' \
-              -w password \
-              -b 'uid=einstein,ou=users,dc=example,dc=com' DN
+            curl localhost:1389
+            if [ $? -eq 52 ]; then
+              echo good
+            else
+              exit 1
+            fi
       - name: stop ldap server container
         if: always()
         run: docker compose -f compose.yaml down
