@@ -1,0 +1,16 @@
+services:
+  ldap:
+    image: "bitnami/openldap"
+    ports:
+      - "1389:1389"
+      - "1636:1636"
+    environment:
+      - LDAP_ROOT=dc=example,dc=com
+      - LDAP_DOMAIN_USERNAME=admin
+      - LDAP_ADMIN_PASSWORD=password
+      - LDAP_CUSTOM_LDIF_DIR=/ldifs
+    volumes:
+      - ./ldifs:/ldifs
+
+      # ldapsearch -D "cn=admin,dc=example,dc=com" -W -p 1389 -h localhost -b "dc=example,dc=com" -s sub -x "(objectclass=*)"
+      # ldapsearch -D "cn=admin,dc=example,dc=com" -W -p 1389 -h localhost -b "dc=example,dc=com" -s sub -x "cn=einstein"
