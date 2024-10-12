@@ -19,6 +19,9 @@ on:
       - .editorconfig
       - docs/**
   pull_request: null
+  release:
+    types:
+      - created
 jobs:
   build:
     strategy:
