@@ -1,5 +1,9 @@
 {
   "name": "ldap-just-linux-x64-gnu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shaozi/ldap-just.git"
+  },
   "version": "0.0.0",
   "os": [
     "linux"
