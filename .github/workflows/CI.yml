@@ -124,7 +124,6 @@ jobs:
       fail-fast: false
       matrix:
         node:
-          - "18"
           - "20"
     runs-on: ubuntu-latest
     steps:
@@ -172,7 +171,6 @@ jobs:
       fail-fast: false
       matrix:
         node:
-          - "18"
           - "20"
     runs-on: ubuntu-latest
     steps:
@@ -234,10 +232,14 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: artifacts
+      - name: Download all artifacts to local
+        uses: actions/download-artifact@v4
+        with:
+          pattern: *.node
       - name: Move artifacts
         run: yarn artifacts
       - name: List packages
-        run: ls -R ./npm
+        run: ls -R
         shell: bash
       - name: Publish
         run: |
