@@ -19,9 +19,6 @@ on:
       - .editorconfig
       - docs/**
   pull_request: null
-  release:
-    types:
-      - created
 jobs:
   build:
     strategy:
@@ -226,33 +223,33 @@ jobs:
         with:
           node-version: 20
           cache: yarn
-      - name: Install dependencies
-        run: yarn install
-      - name: Download all artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: artifacts
       - name: Download all artifacts to local
         uses: actions/download-artifact@v4
-      - name: Move artifacts
-        run: yarn artifacts
-      - name: List packages
-        run: ls
-        shell: bash
       - name: Publish
         run: |
           npm config set provenance true
-          if echo ${{ github.ref }} | grep "^refs/tags/[0-9]\+\.[0-9]\+\.[0-9]\+$";
+          if git log -1 --pretty=%B | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+$";
           then
             echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
             npm publish --access public
-          elif echo ${{ github.ref }} | grep "^refs/tags/[0-9]\+\.[0-9]\+\.[0-9]\+";
+          elif git log -1 --pretty=%B | grep "^[0-9]\+\.[0-9]\+\.[0-9]\+";
           then
             echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
             npm publish --tag next --access public
           else
             echo "Not a release, skipping publish"
           fi
+          # if echo ${{ github.ref }} | grep "^refs/tags/[0-9]\+\.[0-9]\+\.[0-9]\+$";
+          # then
+          #   echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+          #   npm publish --access public
+          # elif echo ${{ github.ref }} | grep "^refs/tags/[0-9]\+\.[0-9]\+\.[0-9]\+";
+          # then
+          #   echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+          #   npm publish --tag next --access public
+          # else
+          #   echo "Not a release, skipping publish"
+          # fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
