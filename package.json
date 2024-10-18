@@ -1,6 +1,6 @@
 {
   "name": "ldap-just",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "index.js",
   "types": "index.d.ts",
   "repository": {
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@napi-rs/cli": "^2.18.4",
-    "ava": "^6.0.1"
+    "ava": "^6.1.3"
   },
   "ava": {
     "timeout": "3m"
@@ -39,12 +39,6 @@
     "universal": "napi universal",
     "version": "napi version"
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
-  "optionalDependencies": {
-    "ldap-just-win32-x64-msvc": "0.0.6",
-    "ldap-just-darwin-x64": "0.0.6",
-    "ldap-just-linux-x64-gnu": "0.0.6",
-    "ldap-just-linux-x64-musl": "0.0.6"
-  }
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
 
