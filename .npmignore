@@ -8,5 +8,9 @@ npm
 rustfmt.toml
 yarn.lock
 .yarn
+artifacts
+bindings-*
+ldifs
+compose.yaml
 __test__
 renovate.json
