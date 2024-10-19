@@ -1,0 +1,102 @@
+dn: dc=example,dc=com
+dc: example
+objectClass: dcObject
+objectClass: organization
+o: Example, Inc
+
+dn: ou=users,dc=example,dc=com
+ou: users
+objectClass: organizationalunit
+
+# Users
+dn: ou=People,dc=example,dc=com
+objectClass: organizationalUnit
+ou: people
+
+# Groups
+dn: ou=Groups,dc=example,dc=com
+objectClass: organizationalUnit
+ou: groups
+
+# Group employees
+dn: cn=员工,ou=Groups,dc=example,dc=com
+cn: 公司员工
+gidNumber: 1001
+objectClass: top
+objectclass: posixGroup
+
+dn: cn=physics,ou=Groups,dc=example,dc=com
+cn: Physics 
+gidNumber: 1002
+objectClass: top
+objectclass: posixGroup
+
+dn: cn=mathmatics,ou=Groups,dc=example,dc=com
+cn: mathmatics 
+gidNumber: 1003
+objectClass: top
+objectclass: posixGroup
+
+dn: uid=gauss,ou=users,dc=example,dc=com
+uid: gauss
+cn: gauss
+objectClass: account
+objectClass: posixAccount
+objectClass: top
+loginShell: /bin/bash
+uidNumber: 1001
+gidNumber: 1001
+homeDirectory: /home/gauss
+gecos: gauss
+userpassword: password
+
+
+dn: uid=einstein,ou=users,dc=example,dc=com
+uid: einstein
+cn: Albert Einstein
+sn: Einstein
+objectClass: top
+objectClass: inetOrgPerson
+userpassword: password
+
+dn: cn=员工,ou=Groups,dc=example,dc=com
+changetype: modify
+add: memberUid
+memberUid: einstein
+
+dn: cn=员工,ou=Groups,dc=example,dc=com
+changetype: modify
+add: memberUid
+memberUid: gauss
+
+dn: cn=physics,ou=Groups,dc=example,dc=com
+changetype: modify
+add: memberUid
+memberUid: einstein
+
+dn: cn=mathmatics,ou=Groups,dc=example,dc=com
+changetype: modify
+add: memberUid
+memberUid: gauss
+
+dn: uid=jsmith1,ou=users,dc=example,dc=com
+changetype: add
+objectClass: inetOrgPerson
+description: John Smith from Accounting.  John is the project
+  manager of the building project, so contact him with any que
+ stions.
+cn: John Smith (斯密斯)
+sn: Smith
+uid: jsmith1
+
+dn: uid=jsmith1,ou=users,dc=example,dc=com
+changetype: modify
+add: mail
+mail: jsmith1@example.com
+mail: johnsmith@example.com
+
+dn: uid=einstein,ou=users,dc=example,dc=com
+changetype: modify
+add: jpegPhoto
+jpegPhoto:< file:///ldifs/einstein.jpg
+
