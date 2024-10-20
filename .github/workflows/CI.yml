@@ -135,7 +135,8 @@ jobs:
           environment_variables: DEBUG RUSTUP_IO_THREADS
           shell: bash
           run: |
-            sudo pkg install -y -f curl node libnghttp2 yarn
+            sudo cd /usr/ports/www/node/ && sudo make install clean
+            sudo pkg install -y -f curl libnghttp2 yarn
             echo "get rustup"
             curl https://sh.rustup.rs -sSf --output rustup.sh
             sh rustup.sh -y --profile minimal --default-toolchain stable
