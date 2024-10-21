@@ -5,7 +5,7 @@ import { authenticate } from "../index.js";
 test("ldap search user with all attrs including binary", async (t) => {
   let result = await authenticate({
     ldapOpts: {
-      url: "ldap://localhost:1389",
+      url: "ldap://ldap:1389",
     },
     adminDn: "cn=admin,dc=example,dc=com",
     adminPassword: "password",
@@ -27,7 +27,7 @@ test("ldap search user with all attrs including binary", async (t) => {
 test("ldap search user with no attrs", async (t) => {
   let result = await authenticate({
     ldapOpts: {
-      url: "ldap://localhost:1389",
+      url: "ldap://ldap:1389",
     },
     adminDn: "cn=admin,dc=example,dc=com",
     adminPassword: "password",
@@ -46,7 +46,7 @@ test("ldap search user with no attrs", async (t) => {
 test("ldap search user with some attrs", async (t) => {
   let result = await authenticate({
     ldapOpts: {
-      url: "ldap://localhost:1389",
+      url: "ldap://ldap:1389",
     },
     adminDn: "cn=admin,dc=example,dc=com",
     adminPassword: "password",
@@ -69,7 +69,7 @@ test("ldap search user with some attrs", async (t) => {
 test("user loging ldap search user with some attrs", async (t) => {
   let result = await authenticate({
     ldapOpts: {
-      url: "ldap://localhost:1389",
+      url: "ldap://ldap:1389",
     },
     userDn: "uid=einstein,ou=users,dc=example,dc=com",
     userPassword: "password",
@@ -92,7 +92,7 @@ test("user loging ldap search user with some attrs", async (t) => {
 test("verify user only", async (t) => {
   let result = await authenticate({
     ldapOpts: {
-      url: "ldap://localhost:1389",
+      url: "ldap://ldap:1389",
     },
     adminDn: "cn=admin,dc=example,dc=com",
     adminPassword: "password",
@@ -111,7 +111,7 @@ test("verify user only", async (t) => {
 test("Get user with groups", async (t) => {
   let result = await authenticate({
     ldapOpts: {
-      url: "ldap://localhost:1389",
+      url: "ldap://ldap:1389",
     },
     adminDn: "cn=admin,dc=example,dc=com",
     adminPassword: "password",
