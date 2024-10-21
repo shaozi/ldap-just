@@ -8,6 +8,10 @@ services:
       - LDAP_ROOT=dc=example,dc=com
       - LDAP_DOMAIN_USERNAME=admin
       - LDAP_ADMIN_PASSWORD=password
+      - LDAP_ENABLE_TLS=yes
+      - LDAP_TLS_CERT_FILE=./ldifs/ldap.crt
+      - LDAP_TLS_KEY_FILE=./ldifs/ldap.key
+      - LDAP_TLS_CA_FILE=./ldifs/ldap_root_ca.crt
       - LDAP_CUSTOM_LDIF_DIR=/ldifs
     volumes:
       - ./ldifs:/ldifs
@@ -15,7 +19,9 @@ services:
       - ldap
 
   # ldapsearch -D "cn=admin,dc=example,dc=com" -W -p 1389 -h localhost -b "dc=example,dc=com" -s sub -x "(objectclass=*)"
-  # ldapsearch -D "cn=admin,dc=example,dc=com" -W -p 1389 -h localhost -b "dc=example,dc=com" -s sub -x "cn=einstein"
+  # ldapsearch -D "cn=admin,dc=example,dc=com" -W -p 1389 -h localhost -b "dc=example,dc=com" -s sub -x "uid=einstein"
+  # LDAPTLS_REQCERT=never ldapsearch -D "cn=admin,dc=example,dc=com" -W -p 1389 -h localhost -b "dc=example,dc=com" -s sub -x -ZZ "uid=einstein"
+  # LDAPTLS_REQCERT=never ldapsearch -D "cn=admin,dc=example,dc=com" -W -H ldaps://localhost:1636 -b "dc=example,dc=com" -s sub -x "uid=einstein"
 
 networks:
   ldap:
