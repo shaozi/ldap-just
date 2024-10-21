@@ -11,6 +11,13 @@ services:
       - LDAP_CUSTOM_LDIF_DIR=/ldifs
     volumes:
       - ./ldifs:/ldifs
+    networks:
+      - ldap
 
-      # ldapsearch -D "cn=admin,dc=example,dc=com" -W -p 1389 -h localhost -b "dc=example,dc=com" -s sub -x "(objectclass=*)"
-      # ldapsearch -D "cn=admin,dc=example,dc=com" -W -p 1389 -h localhost -b "dc=example,dc=com" -s sub -x "cn=einstein"
+  # ldapsearch -D "cn=admin,dc=example,dc=com" -W -p 1389 -h localhost -b "dc=example,dc=com" -s sub -x "(objectclass=*)"
+  # ldapsearch -D "cn=admin,dc=example,dc=com" -W -p 1389 -h localhost -b "dc=example,dc=com" -s sub -x "cn=einstein"
+
+networks:
+  ldap:
+    name: ldap_network
+    driver: bridge
