@@ -1,6 +1,6 @@
 {
   "name": "ldap-just-linux-x64-musl",
-  "version": "0.0.0",
+  "version": "0.0.21",
   "os": [
     "linux"
   ],
