@@ -43,6 +43,7 @@ test("ldap search user with no attrs", async (t) => {
     bin_attrs: {},
   });
 });
+
 test("ldap search user with some attrs", async (t) => {
   let result = await authenticate({
     ldapOpts: {
@@ -66,6 +67,7 @@ test("ldap search user with some attrs", async (t) => {
     bin_attrs: {},
   });
 });
+
 test("user loging ldap search user with some attrs", async (t) => {
   let result = await authenticate({
     ldapOpts: {
@@ -108,6 +110,7 @@ test("verify user only", async (t) => {
     bin_attrs: {},
   });
 });
+
 test("Get user with groups", async (t) => {
   let result = await authenticate({
     ldapOpts: {
@@ -133,6 +136,55 @@ test("Get user with groups", async (t) => {
         "cn=physics,ou=Groups,dc=example,dc=com",
       ],
       uid: ["einstein"],
+    },
+    bin_attrs: {},
+  });
+});
+
+test("user loging ldap tls search user with some attrs", async (t) => {
+  let result = await authenticate({
+    ldapOpts: {
+      url: "ldaps://ldap:1636",
+      tlsOptions: { rejectUnauthorized: false },
+    },
+    userDn: "uid=einstein,ou=users,dc=example,dc=com",
+    userPassword: "password",
+    username: "einstein",
+    usernameAttribute: "uid",
+    userSearchBase: "ou=users,dc=example,dc=com",
+    attributes: ["cn", "sn"],
+  });
+  const users = JSON.parse(result);
+  t.deepEqual(users, {
+    dn: "uid=einstein,ou=users,dc=example,dc=com",
+    attrs: {
+      cn: ["Albert Einstein"],
+      sn: ["Einstein"],
+    },
+    bin_attrs: {},
+  });
+});
+
+test("user loging ldap starttls search user with some attrs", async (t) => {
+  let result = await authenticate({
+    ldapOpts: {
+      url: "ldap://ldap:1389",
+      tlsOptions: { rejectUnauthorized: false },
+    },
+    starttls: true,
+    userDn: "uid=einstein,ou=users,dc=example,dc=com",
+    userPassword: "password",
+    username: "einstein",
+    usernameAttribute: "uid",
+    userSearchBase: "ou=users,dc=example,dc=com",
+    attributes: ["cn", "sn"],
+  });
+  const users = JSON.parse(result);
+  t.deepEqual(users, {
+    dn: "uid=einstein,ou=users,dc=example,dc=com",
+    attrs: {
+      cn: ["Albert Einstein"],
+      sn: ["Einstein"],
     },
     bin_attrs: {},
   });
