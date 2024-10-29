@@ -1,5 +1,5 @@
 {
-  "name": "ldap-just-darwin-arm64",
+  "name": "@shaozi/ldap-just-darwin-arm64",
   "version": "0.0.22",
   "repository": {
     "type": "git",
@@ -20,3 +20,4 @@
     "node": ">= 10"
   }
 }
+
