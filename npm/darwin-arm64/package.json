@@ -1,6 +1,6 @@
 {
   "name": "@shaozi/ldap-just-darwin-arm64",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/shaozi/ldap-just.git"
@@ -20,4 +20,3 @@
     "node": ">= 10"
   }
 }
-

@@ -1,6 +1,6 @@
 {
   "name": "@shaozi/ldap-just-linux-x64-musl",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/shaozi/ldap-just.git"
@@ -23,4 +23,3 @@
     "musl"
   ]
 }
-
