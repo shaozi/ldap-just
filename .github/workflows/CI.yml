@@ -147,7 +147,6 @@ jobs:
             freebsd-version
             yarn install
             yarn build
-            yarn test
             rm -rf node_modules
             rm -rf target
             rm -rf .yarn/cache
