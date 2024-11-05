@@ -1,6 +1,6 @@
 {
   "name": "@shaozi/ldap-just-freebsd-x64",
-  "version": "0.0.0",
+  "version": "0.0.24",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/shaozi/ldap-just.git"
@@ -25,4 +25,3 @@
     "@shaozi/ldap-just-freebsd-x64-linux-x64-gnu": "0.0.0"
   }
 }
-
